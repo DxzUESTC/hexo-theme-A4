@@ -12,7 +12,7 @@
 <div class="recent-posts">
     <h3>最近文章</h3>
     <ul>
-        <% var recentPosts = site.posts.data.slice(0, 5); %>
+        <% var recentPosts = site.posts.data.sort(function(a, b) { return b.date - a.date; }).slice(0, 5); %>
         <% for(var j = 0; j < recentPosts.length; j++) { %>
             <li>
                 <a href="<%= recentPosts[j].permalink %>"><%= recentPosts[j].title %></a>
