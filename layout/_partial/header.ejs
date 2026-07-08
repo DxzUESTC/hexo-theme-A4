@@ -17,19 +17,54 @@
         <% } %>
     </div>
 <% } %>
+    <style>
+        .index-header-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+        .index-avatar {
+            width: 52px;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+            transition: transform 0.3s ease-in-out;
+            border-radius: <%= theme.isRoundedAvatar ? '50%' : '0' %>;
+        }
+        <% if (theme.isAvatarRotating && theme.isRoundedAvatar) { %>
+        .index-avatar:hover {
+            animation: rotateAvatar 2s linear infinite;
+        }
+        @keyframes rotateAvatar {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        <% } %>
+        .index-logo-sm {
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+    </style>
+
 <% if(theme.index.titlePosition == "left") { %>
-    <div style="text-align: left;">
-<% } else if(theme.index.titlePosition == "center") { %>
-    <div style="text-align: center;"> 
+    <div class="index-header-row" style="justify-content: flex-start;">
+<% } else { %>
+    <div class="index-header-row" style="justify-content: center;">
 <% } %>
-        <a class="index-logo" href="<%- url_for() %>"><%= config.title %></a>
-        <div style="margin-bottom: 12px;"> 
-            <% for (name in theme.menu) { %>
-                <% if(theme.menu[name] == '/') { %>
-                    <%= name %>
-                <% } else if(theme.showInMenu.includes(name)) { %>
-                    &nbsp / &nbsp<a href="<%- url_for(theme.menu[name]) %>"><%= name %></a>
-                <% } %>
+        <img
+            alt="avatar"
+            class="index-avatar"
+            src="<%- url_for(theme.favicon) %>"
+        />
+        <a class="index-logo-sm" href="<%- url_for() %>"><%= config.title %></a>
+    </div>
+    <div style="margin-bottom: 12px;<%= theme.index.titlePosition == 'center' ? ' text-align: center;' : '' %>"> 
+        <% for (name in theme.menu) { %>
+            <% if(theme.menu[name] == '/') { %>
+                <%= name %>
+            <% } else if(theme.showInMenu.includes(name)) { %>
+                &nbsp / &nbsp<a href="<%- url_for(theme.menu[name]) %>"><%= name %></a>
             <% } %>
-        </div>
+        <% } %>
     </div>

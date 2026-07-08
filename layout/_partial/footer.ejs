@@ -183,5 +183,14 @@
 </script>
 
 <% if(theme.postInfo.viewCount) { %>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+    <script async src="/js/busuanzi.pure.mini.js" onerror="document.getElementById('busuanzi_container_site_pv')&&(document.getElementById('busuanzi_container_site_pv').innerHTML='本站总访问：<span style=color:#999>加载失败</span>次');"></script>
+    <script>
+    // 如果 5 秒后不蒜子仍未加载成功，显示加载失败
+    setTimeout(function(){
+        var el = document.getElementById('busuanzi_value_site_pv');
+        if(el && el.innerHTML === '') {
+            el.innerHTML = '<span style="color:#999">加载中...</span>';
+        }
+    }, 5000);
+    </script>
 <% } %>
