@@ -7,3 +7,17 @@
             </div>
     <% break; }} %>
 </div>
+
+<!-- 最近文章模块 -->
+<div class="recent-posts">
+    <h3>最近文章</h3>
+    <ul>
+        <% var recentPosts = site.posts.data.slice(0, 5); %>
+        <% for(var j = 0; j < recentPosts.length; j++) { %>
+            <li>
+                <a href="<%= recentPosts[j].permalink %>"><%= recentPosts[j].title %></a>
+                <span class="post-date">（<%= recentPosts[j].date.toISOString().split('T')[0] %>）</span>
+            </li>
+        <% } %>
+    </ul>
+</div>
